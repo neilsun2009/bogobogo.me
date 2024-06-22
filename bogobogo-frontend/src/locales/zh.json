@@ -1,0 +1,26 @@
+{
+    "intro": {
+        "myName": "我的名字是"
+    },
+    "subtitle": {
+        "engineer": "我是一名拥有10多年软件工程经验的人工智能工程师。",
+        "developer": "我是一名软件开发人员，热衷于创造创新的解决方案。",
+        "researcher": "我是一名研究员，专注于人工智能和机器学习。"
+    },
+    "header": {
+        "cv": "简历",
+        "projects": "项目"
+    },
+    "footer": {
+        "copyright": "© 版权 Bogo 2016-2024. 版权所有。",
+        "shoutout": "感谢黑山共和国的顶级域名"
+    },
+    "cv": {
+        "education": "教育背景",
+        "workExperience": "工作经历",
+        "hkust": "香港科技大学",
+        "sysu": "中山大学",
+        "sensetime": "商汤科技有限公司"
+    }
+}
+  
