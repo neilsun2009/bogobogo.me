@@ -1,54 +1,108 @@
-@import (reference) '../less-vars.js';
-
 .HomePage {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-  background: url('@{publicUrl}/assets/background1.jpg') no-repeat center center/cover;
-  color: #000;
+  flex-direction: row;
+  position: relative;
+  height: 100%;
+  width: 100%;
+  color: #333;
+  font-family: 'EB Garamond', serif;
+  
+  .white {
+    flex: 1;
+    background: white;
+  }
+  
+  .bg {
+    flex: 2;
+    background: url('../assets/bg-1.jpg') no-repeat center center/cover;
+  }
 
-  .content {
-    width: 33%;
+  .homeContent {
+    position: absolute;
+    top: 50%;
+    left: 40px;
+    transform: translateY(-60%);
     text-align: left;
 
     h1 {
-      font-size: 3rem;
-    }
-
-    .highlight {
-      background: yellow;
-    }
-
-    .subtitle {
-      font-size: 1.5rem;
-      transition: opacity 0.5s ease-in-out;
-      &.fade-in {
-        opacity: 1;
+      margin: 0;
+      font-size: 6rem;
+      line-height: 6rem;
+      text-shadow: 2px 2px 0 white;
+      color: #000;
+      
+      .highlight {
+        background: linear-gradient(to bottom, transparent 50%, yellow 50%);
+        background-repeat: no-repeat;
+        padding: 0 10px;
+        -webkit-box-decoration-break: clone;
+        box-decoration-break: clone;
+        transition: all 0.2s ease-in-out;
       }
-      &.fade-out {
-        opacity: 0;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: 4.5rem;
+      line-height: 4.5rem;
+      color: #000;
+    }
+
+    .subtitleContainer {
+      margin: 30px 0 0;
+    }
+    
+    .subtitle {
+      font-family: 'Caveat', cursive;
+      font-size: 2rem;
+      line-height: 2rem;
+      background: linear-gradient(to bottom, transparent 40%, #fff 40%);
+      background-repeat: no-repeat;
+      -webkit-box-decoration-break: clone;
+      box-decoration-break: clone;
+      transition: all 0.5s ease-in-out;
+
+      .highlight {
+        // background: linear-gradient(to bottom, transparent 50%, yellow 50%);
+        background-repeat: no-repeat;
+        padding: 0 10px 2px 2px;
       }
     }
 
     .arrows {
-      margin: 20px 0;
+      margin: 25px 0;
       button {
-        margin: 0 5px;
+        margin: 0;
+        // padding: 0;
         background: none;
         border: none;
         cursor: pointer;
-        font-size: 1.5rem;
+        font-size: 1rem;
+        color: #666;
+        opacity: 0.5;
+        transition: all 0.2s ease-in-out;
+        &:hover {
+          opacity: 1;
+        }
       }
     }
 
     .links {
+      margin-top: 20px;
+      height: 60px;
       button {
-        margin: 10px 0;
+        font-family: 'EB Garamond', serif;
+        margin: 0 20px 0 0;
         background: none;
         border: none;
         cursor: pointer;
-        font-size: 1.5rem;
+        font-size: 1.2rem;
+        color: #666;
+        opacity: 0.75;
+        transition: all 0.2s ease-in-out;
+        &:hover {
+          opacity: 1;
+        }
       }
     }
   }

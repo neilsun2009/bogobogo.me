@@ -1,73 +1,100 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import CV from './CV';
 import Projects from './Projects';
 import './HomePage.less';
+import subtitleList from '../configs/subtitles.json';
+
+import bg0 from '../assets/bg-1.jpg';
+import bg1 from '../assets/bg-2.jpg';
+import bg2 from '../assets/bg-3.jpg';
+import { FileDoneOutlined, ProductOutlined } from '@ant-design/icons';
 
 const HomePage: React.FC = () => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const [currentSubtitleIndex, setCurrentSubtitleIndex] = useState(0);
   const [currentPage, setCurrentPage] = useState('home');
+  const timeoutId = useRef<NodeJS.Timeout | null>(null);
+  const changeSubtitleTimeout = 5000;
 
-  console.log(t);
-  console.log(i18n);
-  
-  const subtitles = [
-    t('subtitle.engineer'),
-    t('subtitle.developer'),
-    t('subtitle.researcher')
-  ];
+  const pageComponentMap: Record<string, React.ReactNode> = {
+    cv: <CV />,
+    projects: <Projects />,
+  }
+
+  const subtitleIdxBgMap: Record<number, string> = {
+    0: bg0,
+    1: bg1,
+    2: bg2,
+  }
+
+  const curSubtitle = subtitleList[currentSubtitleIndex];
+
+  const changeSubtitle = (increment = 1) => {
+    setCurrentSubtitleIndex((prevIndex) => (prevIndex + increment + subtitleList.length) % subtitleList.length);
+  if (timeoutId.current) clearTimeout(timeoutId.current);
+  timeoutId.current = setTimeout(() => changeSubtitle(), changeSubtitleTimeout);
+  };
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentSubtitleIndex((prevIndex) => (prevIndex + 1) % subtitles.length);
-    }, 5000);
-
-    return () => clearInterval(interval);
-  }, [subtitles.length]);
-
-  const handleLeftArrowClick = () => {
-    setCurrentSubtitleIndex((prevIndex) => (prevIndex - 1 + subtitles.length) % subtitles.length);
-  };
-
-  const handleRightArrowClick = () => {
-    setCurrentSubtitleIndex((prevIndex) => (prevIndex + 1) % subtitles.length);
-  };
+    changeSubtitle();
+    return () => {
+      if (timeoutId.current) clearTimeout(timeoutId.current);
+    };
+  }, [subtitleList.length]);
 
   const handleLinkClick = (page: string) => {
     setCurrentPage(page);
   };
 
-  const handleLanguageChange = (lng: string) => {
-    i18n.changeLanguage(lng);
-  };
+  const accentColorBgStr = `linear-gradient(to bottom, transparent 50%, ${curSubtitle.color} 50%)`;
+
+  const getLinksBySubtitleIdx = (idx: number) => {
+    switch (idx) {
+      case 0: return (
+        <>
+          <button onClick={() => handleLinkClick('cv')}><FileDoneOutlined /> {t('header.cv')}</button>
+          <button onClick={() => handleLinkClick('projects')}><ProductOutlined /> {t('header.projects')}</button>
+        </>
+      );
+      default:
+        return null;
+    }
+  }
 
   return (
     <div className="HomePage">
-      {currentPage === 'home' ? (
-        <div className="content">
+      <div className='white'>
+        {currentPage !== 'home' && pageComponentMap[currentPage]}
+      </div>
+      <div className='bg' style={{ backgroundImage: `url(${subtitleIdxBgMap[currentSubtitleIndex]})` }}>
+
+      </div>
+      {currentPage === 'home' && (
+        <div className="homeContent">
+          <h2>Hi!</h2>
           <h1>
-            Hi! <br /> {t('intro.myName')} <span className="highlight">Bogo</span>.
+            {t('intro.myName')} <span className="highlight" style={{background: accentColorBgStr}}>Bogo</span>.
           </h1>
-          <p className="subtitle">{subtitles[currentSubtitleIndex]}</p>
-          <div className="arrows">
-            <button onClick={handleLeftArrowClick}>&lt;&lt;</button>
-            <button onClick={handleRightArrowClick}>&gt;&gt;</button>
-          </div>
+          <p className='subtitleContainer'>
+            <span className='subtitle'>
+              {t(curSubtitle.subtitleKey).split('*').map((text, index) => 
+                index % 2 === 0 ? 
+                  <span>{text}</span> : 
+                  <span key={index} className="highlight" style={{background: accentColorBgStr}}>{text}</span>
+              )}
+            </span>
+          </p>
+          <span className="arrows">
+            <button onClick={() => changeSubtitle(-1)}>&lt;&lt;</button>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <button onClick={() => changeSubtitle(1)}>&gt;&gt;</button>
+          </span>
           <div className="links">
-            <button onClick={() => handleLinkClick('cv')}>{t('header.cv')}</button>
-            <button onClick={() => handleLinkClick('projects')}>{t('header.projects')}</button>
+            {getLinksBySubtitleIdx(currentSubtitleIndex)}
           </div>
         </div>
-      ) : currentPage === 'cv' ? (
-        <CV />
-      ) : (
-        <Projects />
       )}
-      <div className="language-switcher">
-        <button onClick={() => handleLanguageChange('en')}>EN</button>
-        <button onClick={() => handleLanguageChange('zh')}>中文</button>
-      </div>
     </div>
   );
 }

@@ -3,7 +3,7 @@
         "myName": "My name is"
     },
     "subtitle": {
-        "engineer": "I'm an AI engineer with 10+ years experience in software engineering.",
+        "engineer": "I'm an *AI engineer* with 10+ years experience in *software engineering*.",
         "developer": "I'm a software developer with a passion for creating innovative solutions.",
         "researcher": "I'm a researcher focused on artificial intelligence and machine learning."
     },
@@ -12,8 +12,7 @@
         "projects": "Projects"
     },
     "footer": {
-        "copyright": "© Copyright Bogo 2016-2024. All rights reserved.",
-        "shoutout": "Shout out to Montenegro for the TLD"
+        "shoutout": "Shout out to Montenegro for the TLD."
     },
     "cv": {
         "education": "Education",

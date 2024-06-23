@@ -1,0 +1,20 @@
+[
+    {
+        "index": 0,
+        "subtitleKey": "subtitle.engineer",
+        "bg": "../assets/bg-1.jpg",
+        "color": "#FFE31C"
+    },
+    {
+        "index": 1,
+        "subtitleKey": "subtitle.developer",
+        "bg": "../assets/bg-2.jpg",
+        "color": "#5C98C1"
+    },
+    {
+        "index": 2,
+        "subtitleKey": "subtitle.researcher",
+        "bg": "../assets/bg-3.jpg",
+        "color": "#FF402E"
+    }
+]
