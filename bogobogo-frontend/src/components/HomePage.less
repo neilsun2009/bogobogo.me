@@ -1,6 +1,8 @@
 .HomePage {
   display: flex;
   flex-direction: row;
+  overflow: hidden;
+
   position: relative;
   height: 100%;
   width: 100%;
@@ -28,16 +30,26 @@
       margin: 0;
       font-size: 6rem;
       line-height: 6rem;
+      font-weight: 500;
       text-shadow: 2px 2px 0 white;
       color: #000;
       
       .highlight {
-        background: linear-gradient(to bottom, transparent 50%, yellow 50%);
-        background-repeat: no-repeat;
+        position: relative;
+        display: inline-block;
         padding: 0 10px;
-        -webkit-box-decoration-break: clone;
-        box-decoration-break: clone;
-        transition: all 0.2s ease-in-out;
+
+        .bar {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          height: 50%;
+          z-index: -1;
+          -webkit-box-decoration-break: clone;
+          box-decoration-break: clone;
+          transition: background 1.5s ease-in-out;
+        }
       }
     }
 
@@ -46,6 +58,7 @@
       font-size: 4.5rem;
       line-height: 4.5rem;
       color: #000;
+      font-weight: 500;
     }
 
     .subtitleContainer {
@@ -56,29 +69,45 @@
       font-family: 'Caveat', cursive;
       font-size: 2rem;
       line-height: 2rem;
-      background: linear-gradient(to bottom, transparent 40%, #fff 40%);
+      background: linear-gradient(to bottom, transparent 40%, #fff 40%, #fff 80%, transparent 80%);
       background-repeat: no-repeat;
       -webkit-box-decoration-break: clone;
       box-decoration-break: clone;
       transition: all 0.5s ease-in-out;
 
       .highlight {
-        // background: linear-gradient(to bottom, transparent 50%, yellow 50%);
+        position: relative;
+        display: inline-block;
         background-repeat: no-repeat;
-        padding: 0 10px 2px 2px;
+        padding: 0px 5px;
+        z-index: 0;
+
+        .bar {
+          position: absolute;
+          bottom: -2px;
+          left: 2px;
+          width: 100%;
+          height: 50%;
+          z-index: -1;
+          -webkit-box-decoration-break: clone;
+          box-decoration-break: clone;
+          transition: background 1.5s ease-in-out;
+        }
       }
     }
 
     .arrows {
-      margin: 25px 0;
-      button {
-        margin: 0;
+      margin: 10px 0;
+      display: inline-block;
+      span {
+        margin-right: 5px;
         // padding: 0;
         background: none;
         border: none;
         cursor: pointer;
-        font-size: 1rem;
-        color: #666;
+        font-size: 1.5rem;
+        color: #333;
+        text-shadow: 2px 2px 0 #666;
         opacity: 0.5;
         transition: all 0.2s ease-in-out;
         &:hover {
@@ -88,8 +117,8 @@
     }
 
     .links {
-      margin-top: 20px;
-      height: 60px;
+      margin-top: 30px;
+      height: 40px;
       button {
         font-family: 'EB Garamond', serif;
         margin: 0 20px 0 0;
