@@ -5,15 +5,17 @@ import Projects from './Projects';
 import './HomePage.less';
 import subtitleList from '../configs/subtitles.json';
 import { FileDoneOutlined, LeftCircleFilled, ProductOutlined, RightCircleFilled } from '@ant-design/icons';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useMotionValue, useTransform } from 'framer-motion';
+import { useMouse } from 'react-use';
 
 import bg0 from '../assets/bg-1.jpg';
 import bg1 from '../assets/bg-2.jpg';
 import bg2 from '../assets/bg-3.jpg';
 
 const HomePage: React.FC = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [currentPage, setCurrentPage] = useState('home');
+  const lang = i18n.language;
   
   // making page always visible, so that subtitle changes are not paused by browser optimization
   const [pageVisible, setPageVisible] = useState(!document.hidden);
@@ -62,8 +64,6 @@ const HomePage: React.FC = () => {
     setCurrentPage(page);
   };
 
-  const accentColorBgStr = `linear-gradient(to bottom, transparent 50%, ${curSubtitle.color} 50%)`;
-
   const getLinksBySubtitleIdx = (idx: number) => {
     switch (idx) {
       case 0: return (
@@ -90,14 +90,8 @@ const HomePage: React.FC = () => {
   // animation related
   const bgVariants = {
     initial: { y: '-100%', opacity: 0 },
-    out: { y: "100%", opacity: 0 },
-    in: { y: 0, opacity: 1 }
-  };
-  
-  const bgTransition = {
-    type: "tween",
-    ease: "easeOut",
-    duration: 1
+    in: { y: 0, x: 0, opacity: 1, transition: { duration: 1 } },
+    out: { y: "50%", opacity: 0, transition: { duration: 0.5 }},
   };
 
   const subtitleVariants = {
@@ -106,6 +100,46 @@ const HomePage: React.FC = () => {
     exit: { opacity: 0, y: 100, transition: { duration: 0.3 } }
   };
 
+  // background tracking
+  const mouseRef = React.useRef(null);
+  const { docX, docY } = useMouse(mouseRef);
+  const [orientation, setOrientation] = useState({ alpha: 0, beta: 0 });
+
+  useEffect(() => {
+    const handleOrientation = (event: DeviceOrientationEvent) => {
+      setOrientation({ alpha: event.alpha || 0, beta: event.beta || 0 });
+    };
+
+    window.addEventListener('deviceorientation', handleOrientation);
+
+    return () => {
+      window.removeEventListener('deviceorientation', handleOrientation);
+    };
+  }, []);
+
+  const motionDocX = useMotionValue(docX);
+  const motionDocY = useMotionValue(docY);
+
+  const x = useTransform(motionDocX, [0, window.innerWidth], ['2.5%', '-2.5%']);
+  const y = useTransform(motionDocY, [0, window.innerHeight], ['-2.5%', '2.5%']);
+
+  const normalize = (value: number, min: number, max: number, newMin: number, newMax: number) => {
+    return ((value - min) / (max - min)) * (newMax - newMin) + newMin;
+  };
+
+  useEffect(() => {
+    motionDocX.set(docX);
+    motionDocY.set(docY);
+
+    // Check if it's a mobile device
+    if ('ontouchstart' in window) {
+      const normalizedAlpha = normalize(orientation.alpha || 0, 0, 360, -2.5, 2.5);
+      const normalizedBeta = normalize(orientation.beta || 0, -180, 180, -2.5, 2.5);
+      x.set(`${normalizedAlpha}%`);
+      y.set(`${normalizedBeta}%`);
+    }
+  }, [docX, docY, orientation.alpha, orientation.beta]);
+
   return (<>{pageVisible && (
     <div className="HomePage">
       <div className='white'>
@@ -113,33 +147,45 @@ const HomePage: React.FC = () => {
       </div>
       <AnimatePresence mode='wait'>
         <motion.div 
+          className='bgWrapper'
           key={currentSubtitleIndex}
-          className='bg' 
-          style={{ backgroundImage: `url(${subtitleIdxBgMap[currentSubtitleIndex]})` }}
           initial="initial"
           animate="in"
           exit="out"
           variants={bgVariants}
-          transition={bgTransition}
+          // transition={bgTransition}
         >
+          <motion.div 
+            ref={mouseRef}
+            className='bg' 
+            style={{ 
+              backgroundImage: `url(${subtitleIdxBgMap[currentSubtitleIndex]})`,
+              backgroundPosition: 'center',
+              // transform: `translate(${x}, ${y})`,
+              x,
+              y,
+            }}
+          >
+          </motion.div>
         </motion.div>
       </AnimatePresence>
       {currentPage === 'home' && (
         <div className="homeContent">
           <motion.h2
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
+            initial={{ opacity: 0, y: -50}}
+            animate={{ opacity: 1, y: 0}}
             transition={{ delay: 0.2, duration: 0.5}}
           >
             Hi!
           </motion.h2>
           <motion.h1
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
+            initial={{ opacity: 0, y: -50 }}
+            animate={{ opacity: 1, y: 0}}
             transition={{ delay: 0.5, duration: 1 }}
+            style={{fontWeight: lang === 'zh' ? 700 : 500}}
           >
             {t('intro.myName')} 
-            &nbsp;
+            {lang === 'en' && ' '}
             <motion.span 
               className="highlight"
               initial={{ opacity: 0 }}
@@ -159,7 +205,7 @@ const HomePage: React.FC = () => {
             </motion.span>
           </motion.h1>
           <AnimatePresence mode='wait'>
-            <motion.p
+            <motion.div
               key={currentSubtitleIndex}
               className='subtitleContainer'
               variants={subtitleVariants}
@@ -167,7 +213,13 @@ const HomePage: React.FC = () => {
               animate="animate"
               exit="exit"
             >
-              <span className='subtitle'>
+              <span className='subtitle'
+                style={{ 
+                  background: lang === 'zh' ? 'linear-gradient(to bottom, transparent 20%, #fff 20%, #fff 90%, transparent 90%)' : 
+                    'linear-gradient(to bottom, transparent 40%, #fff 40%, #fff 80%, transparent 80%)',
+                  fontWeight: lang === 'zh' ? 600 : 'normal',
+                }}
+              >
                 {t(curSubtitle.subtitleKey).split('*').map((text, index) => 
                   index % 2 === 0 ? 
                     <span key={index}>{text}</span> : 
@@ -177,15 +229,17 @@ const HomePage: React.FC = () => {
                         className="bar"
                         style={{ 
                           background: curSubtitle.color,
+                          height: lang === 'zh' ? '90%' : '50%',
+                          bottom: lang === 'zh' ? '-8px' : '-2px',
                         }}
                         initial={{ scaleX: 0, originX: 0 }}
                         animate={{ scaleX: 1 }}
-                        transition={{ delay: 1.8 + index * 0.2, duration: 0.5 }}
+                        transition={{ delay: 1.8 + index * 0.3, duration: 0.8 }}
                       />
                     </span>
                 )}
               </span>
-            </motion.p>
+            </motion.div>
           </AnimatePresence>
           <motion.div
             className="links"

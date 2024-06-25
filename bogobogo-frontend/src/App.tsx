@@ -1,14 +1,25 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.less';
 import Header from './components/Header';
 import HomePage from './components/HomePage';
 import Footer from './components/Footer';
-// import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 import './i18n';
 
 const App: React.FC = () => {
   const [currentPage, setCurrentPage] = useState<string>('home');
-  // const { t } = useTranslation();
+  const { i18n } = useTranslation();
+  const lang = i18n.language;
+
+  useEffect(() => {
+    if (i18n.language === 'zh') {
+      document.documentElement.style.setProperty('--primary-font', '"Noto Serif SC", serif');
+      document.documentElement.style.setProperty('--secondary-font', '"Noto Serif SC", sans-serif');
+    } else {
+      document.documentElement.style.setProperty('--primary-font', '"EB Garamond", serif');
+      document.documentElement.style.setProperty('--secondary-font', '"Caveat", cursive');
+    }
+  }, [i18n.language]);
 
   const renderPage = () => {
     switch (currentPage) {
