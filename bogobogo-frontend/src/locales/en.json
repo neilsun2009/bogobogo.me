@@ -3,9 +3,11 @@
         "myName": "My name is"
     },
     "subtitle": {
-        "engineer": "I'm an *AI engineer* with 10+ years experience in *software engineering*",
-        "developer": "I'm a *software developer* with a passion for creating *innovative solutions*",
-        "researcher": "I'm a *researcher* focused on *artificial intelligence* and *machine learning*"
+        "engineer": "I'm an *AI engineer* with a strong *full-stack development* background",
+        "programmer": "I'm a *passionate programmer* who programs to *learn*, *practice* and *create*",
+        "blogger": "I'm a *blogger* who writes about *AI*, *books*, and *films*",
+        "designer": "I'm also an amateur *graphic designer* & *photographer* who believes *vision* is the gateway to *mission*",
+        "more": "Yet, I'm *more* than those labels suggest, ever *curious* and ever *evolving*"
     },
     "header": {
         "cv": "CV",

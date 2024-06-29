@@ -8,10 +8,6 @@ import { FileDoneOutlined, LeftCircleFilled, ProductOutlined, RightCircleFilled 
 import { motion, AnimatePresence, useMotionValue, useTransform } from 'framer-motion';
 import { useMouse } from 'react-use';
 
-import bg0 from '../assets/bg-1.jpg';
-import bg1 from '../assets/bg-2.jpg';
-import bg2 from '../assets/bg-3.jpg';
-
 const HomePage: React.FC = () => {
   const { t, i18n } = useTranslation();
   const [currentPage, setCurrentPage] = useState('home');
@@ -52,12 +48,6 @@ const HomePage: React.FC = () => {
   const pageComponentMap: Record<string, React.ReactNode> = {
     cv: <CV />,
     projects: <Projects />,
-  }
-
-  const subtitleIdxBgMap: Record<number, string> = {
-    0: bg0,
-    1: bg1,
-    2: bg2,
   }
 
   const handleLinkClick = (page: string) => {
@@ -101,10 +91,32 @@ const HomePage: React.FC = () => {
   };
 
   // background tracking
+  const [loadedBg, setLoadedBg] = useState('');
   const mouseRef = React.useRef(null);
   const { docX, docY } = useMouse(mouseRef);
   const [orientation, setOrientation] = useState({ alpha: 0, beta: 0 });
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+    window.addEventListener('resize', handleResize);
+    // Clean up the event listener when the component unmounts
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+  useEffect(() => {
+    const img = new Image();
+    console.log(windowWidth)
+    img.src = windowWidth <= 480 ? curSubtitle.bgVertical : curSubtitle.bg;
+    img.onload = () => {
+      setLoadedBg(img.src);
+    };
+  }, [curSubtitle.bg, windowWidth]);
+  
   useEffect(() => {
     const handleOrientation = (event: DeviceOrientationEvent) => {
       setOrientation({ alpha: event.alpha || 0, beta: event.beta || 0 });
@@ -159,8 +171,7 @@ const HomePage: React.FC = () => {
             ref={mouseRef}
             className='bg' 
             style={{ 
-              backgroundImage: `url(${subtitleIdxBgMap[currentSubtitleIndex]})`,
-              backgroundPosition: 'center',
+              backgroundImage: `url(${loadedBg})`,
               // transform: `translate(${x}, ${y})`,
               x,
               y,
@@ -182,7 +193,10 @@ const HomePage: React.FC = () => {
             initial={{ opacity: 0, y: -50 }}
             animate={{ opacity: 1, y: 0}}
             transition={{ delay: 0.5, duration: 1 }}
-            style={{fontWeight: lang === 'zh' ? 700 : 500}}
+            style={{
+              fontWeight: lang === 'zh' ? 700 : 500,
+              margin: lang === 'zh' ? '20px 0' : '0',
+            }}
           >
             {t('intro.myName')} 
             {lang === 'en' && ' '}
@@ -217,7 +231,8 @@ const HomePage: React.FC = () => {
                 style={{ 
                   background: lang === 'zh' ? 'linear-gradient(to bottom, transparent 20%, #fff 20%, #fff 90%, transparent 90%)' : 
                     'linear-gradient(to bottom, transparent 40%, #fff 40%, #fff 80%, transparent 80%)',
-                  fontWeight: lang === 'zh' ? 600 : 'normal',
+                  // fontWeight: lang === 'zh' ? 600 : 'normal',
+                  // lineHeight: lang === 'zh' ? '1.5' : '2rem',
                 }}
               >
                 {t(curSubtitle.subtitleKey).split('*').map((text, index) => 
@@ -229,8 +244,8 @@ const HomePage: React.FC = () => {
                         className="bar"
                         style={{ 
                           background: curSubtitle.color,
-                          height: lang === 'zh' ? '90%' : '50%',
-                          bottom: lang === 'zh' ? '-8px' : '-2px',
+                          height: lang === 'zh' ? '80%' : '50%',
+                          bottom: lang === 'zh' ? '-4px' : '-2px',
                         }}
                         initial={{ scaleX: 0, originX: 0 }}
                         animate={{ scaleX: 1 }}
@@ -247,6 +262,9 @@ const HomePage: React.FC = () => {
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1, duration: 1 }}
+            style={{
+              fontWeight: lang === 'zh' ? 700 : 'normal',
+            }}
           >
             {getLinksBySubtitleIdx(currentSubtitleIndex)}
           </motion.div>

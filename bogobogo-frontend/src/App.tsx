@@ -13,8 +13,8 @@ const App: React.FC = () => {
 
   useEffect(() => {
     if (i18n.language === 'zh') {
-      document.documentElement.style.setProperty('--primary-font', '"Noto Serif SC", serif');
-      document.documentElement.style.setProperty('--secondary-font', '"Noto Serif SC", sans-serif');
+      document.documentElement.style.setProperty('--primary-font', '"Noto Sans SC", serif');
+      document.documentElement.style.setProperty('--secondary-font', '"Noto Sans SC", sans-serif');
     } else {
       document.documentElement.style.setProperty('--primary-font', '"EB Garamond", serif');
       document.documentElement.style.setProperty('--secondary-font', '"Caveat", cursive');
