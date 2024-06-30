@@ -115,6 +115,21 @@
             "cantonese": "Chinese (Cantonese)",
             "german": "German"
         }
+    },
+    "gallery": {
+        "design": "Graphic Design",
+        "photo": "Photography",
+        "more": "More...",
+        "designList": {
+            "movie": "Minimalism movie posters",
+            "qatar2022": "Qatar 2022 wallpapers"
+        },
+        "photoList": {
+            "dragonBoatFestival": "Dragon boat race",
+            "shingMunRiver": "Strolling along Shing Mun River",
+            "nathanRoad": "Nathan Road",
+            "flyAway": "Fly away"
+        }
     }
 }
   

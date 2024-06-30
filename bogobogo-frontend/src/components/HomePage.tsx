@@ -9,6 +9,7 @@ import { motion, AnimatePresence, useMotionValue, useTransform } from 'framer-mo
 import { useMouse } from 'react-use';
 import wechatQrcode from '../assets/wechat-qrcode.bmp';
 import Skillset from './Skillset';
+import Gallery from './Gallery';
 
 const HomePage: React.FC = () => {
   const { t, i18n } = useTranslation();
@@ -52,6 +53,7 @@ const HomePage: React.FC = () => {
   const pageComponentMap: Record<string, React.ReactNode> = {
     cv: <CV color={curSubtitle.color}/>,
     skillset: <Skillset color={curSubtitle.color}/>,
+    gallery: <Gallery color={curSubtitle.color}/>,
     projects: <Projects />,
   }
 
@@ -158,7 +160,7 @@ const HomePage: React.FC = () => {
   const motionDocY = useMotionValue(docY);
 
   const x = useTransform(motionDocX, [0, window.innerWidth], ['2.5%', '-2.5%']);
-  const y = useTransform(motionDocY, [0, window.innerHeight], ['-2.5%', '2.5%']);
+  const y = useTransform(motionDocY, [0, window.innerHeight], ['2.5%', '-2.5%']);
 
   const normalize = (value: number, min: number, max: number, newMin: number, newMax: number) => {
     return ((value - min) / (max - min)) * (newMax - newMin) + newMin;

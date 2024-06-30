@@ -115,6 +115,21 @@
             "cantonese": "中文（粤语）",
             "german": "德语"
         }
+    },
+    "gallery": {
+        "design": "平面设计",
+        "photo": "摄影",
+        "more": "更多...",
+        "designList": {
+            "movie": "极简主义电影海报",
+            "qatar2022": "2022卡塔尔世界杯壁纸"
+        },
+        "photoList": {
+            "dragonBoatFestival": "端午龙舟赛",
+            "shingMunRiver": "漫步城门河",
+            "nathanRoad": "弥敦道",
+            "flyAway": "Fly away"
+        }
     }
 }
   

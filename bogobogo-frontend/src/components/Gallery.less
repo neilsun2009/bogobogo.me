@@ -1,0 +1,87 @@
+@import "../global.less";
+
+.gallery {
+    color: #333;
+    margin-right: 5px;
+
+    h2 {
+        font-size: 2.5rem;
+        line-height: 3.5rem;
+        margin: 20px 0 10px;
+
+        @media (max-width: 768px) {
+            font-size: 2rem;
+            line-height: 3rem;
+        }
+        
+          @media (max-width: 480px) {
+            font-size: 1.5rem;
+            line-height: 2.5rem;
+        }
+    }
+
+    .sectionCtn {
+        display: flex;
+        flex-wrap: wrap;
+        margin-bottom: 20px;
+
+        .item {
+            width: 50%;
+            padding-bottom: 33.33%; // 2/3 of width to maintain 3:2 ratio
+            // border: 5px solid transparent;
+            box-sizing: border-box;
+            position: relative;
+            transition: border-width 0.3s;
+            overflow: hidden;
+
+            @media (max-width: 768px) {
+                width: 100%;
+                padding-bottom: 66.67%;
+                margin-bottom: 10px;
+            }
+
+            .bg {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: #eee;
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
+                transition: all 0.3s;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-size: 3rem;
+                color: #666;
+
+                &:hover {
+                    transform: scale(1.1);
+                    opacity: 0.8;
+                }
+            }
+        
+            .title {
+                position: absolute;
+                font-family: var(--secondary-font);
+                bottom: 0;
+                width: 100%;
+                background-color: rgba(0, 0, 0, 0.5);
+                color: white;
+                padding: 10px;
+                box-sizing: border-box;
+                text-overflow: ellipsis;
+                overflow: hidden;
+                white-space: nowrap;
+                font-size: 1.2rem;
+                @media (max-width: 768px) {
+                    font-size: 1rem;
+                    padding: 5px;
+                }
+            }
+        }
+    }
+
+}
