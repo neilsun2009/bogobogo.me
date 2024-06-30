@@ -3,12 +3,46 @@ import { useTranslation } from 'react-i18next';
 import './Skillset.less';
 import { motion } from 'framer-motion';
 import SubpageProps from '../utils/SubpageProps';
-import cvConfig from '../configs/cv.json';
-import { EnvironmentOutlined } from '@ant-design/icons';
+import skillConfig from '../configs/skillset.json';
 
 const Skillset: React.FC<SubpageProps> = ({ color }) => {
   const { t, i18n } = useTranslation();
   const lang = i18n.language;
+
+  const renderSkillSection = (
+        name: string, 
+        index: number,
+        sectionCfg: {name: string, level: number}[],
+    ) => {
+    const baseDelay = 1 + 0.2 * index;
+    return (
+        <motion.div
+          className="section"
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: baseDelay, duration: 0.5 }}
+        >
+          <h2>{t(`skillset.${name}`)}</h2>
+          <div className='skillCtn'>
+            {sectionCfg.map((skill, skillIdx) => (
+              <div key={skillIdx} className='skill'>
+                <div className='progress-bar'>
+                    <motion.div 
+                        className='progress-bar-fill' 
+                        style={{ width: `${skill.level}%`, backgroundColor: color }}
+                        initial={{ width: 0 }}
+                        animate={{ width: `${skill.level}%` }}
+                        transition={{ delay: baseDelay + 0.2 * skillIdx, duration: 0.5 }}
+                    >
+                    </motion.div>
+                    <span className='skill-name'>{t(`skillset.${name}List.${skill.name}`)}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </motion.div>
+      );
+  }
 
   return (
     <div className="skillset">
@@ -40,87 +74,10 @@ const Skillset: React.FC<SubpageProps> = ({ color }) => {
           />
         {/* </motion.span> */}
       </motion.h1>
-      {/* basic info */}
-      <motion.div
-        className="section"
-        initial={{ opacity: 0, y: 50 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.5, duration: 0.5 }}
-      >
-        <h3>{t('cv.name')}</h3>
-        <p><EnvironmentOutlined /> {t('cv.base')}</p>
-      </motion.div>
-      {/* education */}
-      <motion.h2
-        className="section"
-        initial={{ opacity: 0, y: 50 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.7, duration: 0.5 }}
-      >
-        {t('cv.edu')}
-      </motion.h2>
-      {/* <h2>{t('cv.edu')}</h2> */}
-      {cvConfig.eduExp.map((edu, index) => (
-        <motion.div
-          key={index}
-          className="section"
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1 + 0.2 * index, duration: 0.5 }}
-        >
-          <div className='periodCtn'>
-            <h3>{t(`cv.eduExp.${edu}.name`)}</h3>
-            <p className='big'>{t(`cv.eduExp.${edu}.period`)}</p>
-          </div>
-          <p>{t(`cv.eduExp.${edu}.degree`)}</p>
-          <p 
-            className='detail' 
-            style={{
-              fontSize: lang === 'zh' ? '1em' : '1.2em',
-            }}
-          >
-            {t(`cv.eduExp.${edu}.detail`)}
-          </p>
-        </motion.div>
-      ))}
-      {/* work experience */}
-      <motion.h2
-        className="section"
-        initial={{ opacity: 0, y: 50 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1 + 0.2 * cvConfig.eduExp.length, duration: 0.5 }}
-      >
-        {t('cv.work')}
-      </motion.h2>
-      {cvConfig.workExp.map((work, index) => (
-        <motion.div
-          key={index}
-          className="section"
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1 + 0.2 * cvConfig.eduExp.length + 0.2 + 0.2 * index, duration: 0.5 }}
-        >
-          <div className='periodCtn'>
-            <h3>{t(`cv.workExp.${work.company}.name`)}</h3>
-            <p className='big'>{t(`cv.workExp.${work.company}.period`)}</p>
-          </div>
-          {Array.from({ length: work.posNum }, (_, posIndex) => (<div key={posIndex}>
-            <div className='periodCtn'>
-              <p>{t(`cv.workExp.${work.company}.pos${posIndex+1}.title`)}</p>
-              { work.posNum > 1 && <p>{t(`cv.workExp.${work.company}.pos${posIndex+1}.period`)}</p>}
-              
-            </div>
-            <p 
-              className='detail' 
-              style={{
-                fontSize: lang === 'zh' ? '1em' : '1.2em',
-              }}
-            >
-              {t(`cv.workExp.${work.company}.pos${posIndex+1}.detail`)}
-            </p>
-          </div>))}
-        </motion.div>
-      ))}
+      {renderSkillSection('programmingLang', 0, skillConfig.programmingLang)}
+      {renderSkillSection('ai', 1, skillConfig.ai)}
+      {renderSkillSection('softwareDev', 2, skillConfig.softwareDev)}
+      {renderSkillSection('lang', 3, skillConfig.lang)}
     </div>
   );
 }

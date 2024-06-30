@@ -83,6 +83,38 @@
                 }
             }
         }
+    },
+    "skillset": {
+        "programmingLang": "Programming Languages",
+        "programmingLangList": {
+            "python": "Python",
+            "js": "JavaScript (incl. Node.js, HTML, CSS)",
+            "java": "Java",
+            "c": "C/C++",
+            "go": "Go"
+        },
+        "ai": "Artificial Intelligence",
+        "aiList": {
+            "dl": "Deep Learning",
+            "aiSystem": "AI System",
+            "prompt": "Prompt Engineering",
+            "llm": "Large Language Model",
+            "rl": "Reinforcement Learning"
+        },
+        "softwareDev": "Software Development",
+        "softwareDevList": {
+            "systemArch": "System Architecture",
+            "project": "Project Management",
+            "product": "Product Design",
+            "ui": "UI/UX Design"
+        },
+        "lang": "Natural Languages",
+        "langList": {
+            "mandarin": "Chinese (Mandarin)",
+            "english": "English",
+            "cantonese": "Chinese (Cantonese)",
+            "german": "German"
+        }
     }
 }
   

@@ -1,0 +1,82 @@
+{
+    "programmingLang": [
+        {
+            "name": "python",
+            "level": 90
+        },
+        {
+            "name": "js",
+            "level": 90
+        },
+        {
+            "name": "java",
+            "level": 80
+        },
+        {
+            "name": "go",
+            "level": 60
+        },
+        {
+            "name": "c",
+            "level": 60
+        }
+    ],
+    "ai": [
+        {
+            "name": "aiSystem",
+            "level": 90
+        },
+        {
+            "name": "prompt",
+            "level": 80
+        },
+        {
+            "name": "dl",
+            "level": 80
+        },
+        {
+            "name": "llm",
+            "level": 70
+        },
+        {
+            "name": "rl",
+            "level": 60
+        }
+    ],
+    "softwareDev": [
+        {
+            "name": "systemArch",
+            "level": 90
+        },
+        {
+            "name": "project",
+            "level": 90
+        },
+        {
+            "name": "product",
+            "level": 90
+        },
+        {
+            "name": "ui",
+            "level": 80
+        }
+    ],
+    "lang": [
+        {
+            "name": "mandarin",
+            "level": 100
+        },
+        {
+            "name": "english",
+            "level": 90
+        },
+        {
+            "name": "cantonese",
+            "level": 90
+        },
+        {
+            "name": "german",
+            "level": 60
+        }
+    ]
+}
