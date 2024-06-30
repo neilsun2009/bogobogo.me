@@ -4,13 +4,16 @@ import CV from './CV';
 import Projects from './Projects';
 import './HomePage.less';
 import subtitleList from '../configs/subtitles.json';
-import { FileDoneOutlined, LeftCircleFilled, ProductOutlined, RightCircleFilled } from '@ant-design/icons';
+import { FileDoneOutlined, GithubOutlined, InstagramOutlined, LeftCircleFilled, MailOutlined, PictureOutlined, ProductOutlined, RightCircleFilled, ScheduleOutlined, SwapLeftOutlined, WechatOutlined } from '@ant-design/icons';
 import { motion, AnimatePresence, useMotionValue, useTransform } from 'framer-motion';
 import { useMouse } from 'react-use';
+import wechatQrcode from '../assets/wechat-qrcode.bmp';
+import Skillset from './Skillset';
 
 const HomePage: React.FC = () => {
   const { t, i18n } = useTranslation();
   const [currentPage, setCurrentPage] = useState('home');
+  const [showWechatQR, setShowWechatQR] = useState(false);
   const lang = i18n.language;
   
   // making page always visible, so that subtitle changes are not paused by browser optimization
@@ -34,23 +37,26 @@ const HomePage: React.FC = () => {
 
   const changeSubtitle = (increment = 1) => {
     setCurrentSubtitleIndex((prevIndex) => (prevIndex + increment + subtitleList.length) % subtitleList.length);
-  if (timeoutId.current) clearTimeout(timeoutId.current);
-  timeoutId.current = setTimeout(() => changeSubtitle(), changeSubtitleTimeout);
+    if (timeoutId.current) clearTimeout(timeoutId.current);
+    timeoutId.current = setTimeout(() => changeSubtitle(), changeSubtitleTimeout);
   };
 
   useEffect(() => {
-    changeSubtitle();
+    if (currentPage !== 'home') return;
+    changeSubtitle(0);
     return () => {
       if (timeoutId.current) clearTimeout(timeoutId.current);
     };
-  }, []);
+  }, [currentPage]);
 
   const pageComponentMap: Record<string, React.ReactNode> = {
-    cv: <CV />,
+    cv: <CV color={curSubtitle.color}/>,
+    skillset: <Skillset color={curSubtitle.color}/>,
     projects: <Projects />,
   }
 
   const handleLinkClick = (page: string) => {
+    if (timeoutId.current) clearTimeout(timeoutId.current);
     setCurrentPage(page);
   };
 
@@ -58,18 +64,38 @@ const HomePage: React.FC = () => {
     switch (idx) {
       case 0: return (
         <>
-          <button onClick={() => handleLinkClick('cv')}><FileDoneOutlined /> {t('header.cv')}</button>
-          <button onClick={() => handleLinkClick('projects')}><ProductOutlined /> {t('header.projects')}</button>
+          <a className='linkBtn' onClick={() => handleLinkClick('cv')}><FileDoneOutlined /> {t('header.cv')}</a>
+          <a className='linkBtn' onClick={() => handleLinkClick('projects')}><ProductOutlined /> {t('header.projects')}</a>
         </>
       );
       case 1: return (
         <>
-          <button onClick={() => handleLinkClick('projects')}><ProductOutlined /> {t('header.projects')}</button>
+          <a className='linkBtn' onClick={() => handleLinkClick('projects')}><ProductOutlined /> {t('header.projects')}</a>
+          <a className='linkBtn' onClick={() => handleLinkClick('skillset')}><ScheduleOutlined /> {t('header.skillset')}</a>
+          <a href='https://github.com/neilsun2009' className='linkBtn' target='_blank'><GithubOutlined /> {t('header.git')}</a>
         </>
       );
       case 2: return (
         <>
-          <button onClick={() => handleLinkClick('projects')}><ProductOutlined /> {t('header.projects')}</button>
+          <div className='wechatQrCtn'>
+            <a className='linkBtn' onClick={() => setShowWechatQR(!showWechatQR)}><WechatOutlined /> {t('header.wechat')}</a>
+            <div
+              className={showWechatQR ? 'qrcode': 'qrcode hide'}
+            >
+              <img src={wechatQrcode} alt="Wechat QR Code" />
+            </div>
+          </div>
+        </>
+      );
+      case 3: return (
+        <>
+          <a className='linkBtn' onClick={() => handleLinkClick('gallery')}><PictureOutlined /> {t('header.gallery')}</a>
+          <a href='https://www.instagram.com/neilsun2009/' className='linkBtn' target='_blank'><InstagramOutlined /> {t('header.ins')}</a>
+        </>
+      );
+      case 4: return (
+        <>
+          <a href="mailto:neilsun2009@163.com" className='linkBtn' target='_blank' rel='noreferrer'><MailOutlined /> {t('header.email')}</a>
         </>
       );
       default:
@@ -110,7 +136,6 @@ const HomePage: React.FC = () => {
 
   useEffect(() => {
     const img = new Image();
-    console.log(windowWidth)
     img.src = windowWidth <= 480 ? curSubtitle.bgVertical : curSubtitle.bg;
     img.onload = () => {
       setLoadedBg(img.src);
@@ -154,12 +179,17 @@ const HomePage: React.FC = () => {
 
   return (<>{pageVisible && (
     <div className="HomePage">
-      <div className='white'>
-        {currentPage !== 'home' && pageComponentMap[currentPage]}
+      <div className={currentPage === 'home' ? 'white' : 'white subpage'}>
+        {currentPage !== 'home' && <>
+          <button className='linkBtn' onClick={() => handleLinkClick('home')}><SwapLeftOutlined /> Back</button>
+          <div className='content'>
+            {pageComponentMap[currentPage]}
+          </div>
+        </>}
       </div>
       <AnimatePresence mode='wait'>
         <motion.div 
-          className='bgWrapper'
+          className={currentPage === 'home' ? 'bgWrapper' : 'bgWrapper subpage'}
           key={currentSubtitleIndex}
           initial="initial"
           animate="in"
@@ -245,7 +275,7 @@ const HomePage: React.FC = () => {
                         style={{ 
                           background: curSubtitle.color,
                           height: lang === 'zh' ? '80%' : '50%',
-                          bottom: lang === 'zh' ? '-4px' : '-2px',
+                          bottom: lang === 'zh' ? '-4px' : '0',
                         }}
                         initial={{ scaleX: 0, originX: 0 }}
                         animate={{ scaleX: 1 }}
@@ -263,7 +293,7 @@ const HomePage: React.FC = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1, duration: 1 }}
             style={{
-              fontWeight: lang === 'zh' ? 700 : 'normal',
+              // fontWeight: lang === 'zh' ? 700 : 'normal',
             }}
           >
             {getLinksBySubtitleIdx(currentSubtitleIndex)}

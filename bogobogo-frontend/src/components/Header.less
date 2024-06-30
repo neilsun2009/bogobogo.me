@@ -1,8 +1,14 @@
+@import "../global.less";
+
 .Header {
     position: absolute;
     z-index: 100;
     right: 0;
     padding: 10px 20px;
+
+    @media (max-width: 480px) {
+      padding: 10px;
+    }
   
     nav button {
       margin: 0 10px;
@@ -14,6 +20,12 @@
   
     .language-switcher {
       display: inline-block;
+
+      @media (max-width: 768px) {
+        display: block;
+        margin-bottom: 10px;
+      }
+
       button {
         color: #fff;
         margin-left: 10px;
@@ -39,30 +51,18 @@
         color: #fff;
         opacity: 0.75;
         transition: all 0.2s;
+        text-shadow: 1px 1px 0 #333;
+
+        @media (max-width: 768px) {
+          display: block;
+          margin-bottom: 10px;
+        }
         
         &:hover {
           opacity: 1;
         }
         
-        .qrcode {
-          position: absolute;
-          top: 100%;
-          right: 0;
-          transform: translateY(0.5rem);
-          width: 130px;
-          height: 130px;
-          background: white;
-
-          &:before {
-            content: "";
-            position: absolute;
-            top: -15px;
-            right: 2px;
-            border-width: 10px;
-            border-style: solid;
-            border-color: transparent transparent white transparent;
-          }
-        }
+        
       }
     }
   }

@@ -1,22 +1,81 @@
+@import "../global.less";
+
 .CV {
-    padding: 20px;
-    overflow-y: auto;
-    height: 100vh;
   
-    h2 {
-      margin-top: 0;
+  color: #333;
+  margin-right: 5px;
+
+  h2 {
+    font-size: 2.5rem;
+    line-height: 3.5rem;
+    margin: 0 0 10px 0;
+    border-bottom: 2px solid #ddd;
+    color: #000;
+    margin-bottom: 20px !important;
+
+    @media (max-width: 768px) {
+      font-size: 2rem;
+      line-height: 3rem;
     }
   
-    .section {
-      margin-bottom: 20px;
-    }
-  
-    h3 {
-      margin-bottom: 5px;
-    }
-  
-    p {
-      margin: 2px 0;
+    @media (max-width: 480px) {
+      font-size: 1.5rem;
+      line-height: 2.5rem;
+      margin-bottom: 10px !important;
     }
   }
+
+  .section {
+    margin: 10px 0 30px;
+
+    @media (max-width: 768px) {
+      margin: 10px 0 20px;
+    }
+  
+  }
+
+  .periodCtn {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    @media (max-width: 768px) {
+      flex-direction: column;
+      align-items: start;
+    }
+  }
+
+  h3 {
+    font-size: 1.5rem;
+    line-height: 2rem;
+    margin: 0 0 5px;
+
+    @media (max-width: 768px) {
+      font-size: 1.3rem;
+      line-height: 1.3rem;
+    }
+  
+  }
+
+  p {
+    font-size: 1.2rem;
+    margin: 2px 0;
+
+    &.big {
+      font-weight: bold;
+    }
+  }
+
+  .detail {
+    font-family: var(--secondary-font);
+    font-size: 1.2rem;
+    margin: 10px 0 15px;
+    color: #666;
+
+    @media (max-width: 480px) {
+      font-size: 1rem;
+      margin: 0px 0 20px;
+    }
+  }
+}
   

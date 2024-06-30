@@ -6,22 +6,83 @@
         "engineer": "I'm an *AI engineer* with a strong *full-stack development* background",
         "programmer": "I'm a *passionate programmer* who programs to *learn*, *practice* and *create*",
         "blogger": "I'm a *blogger* who writes about *AI*, *books*, and *films*",
-        "designer": "I'm also an amateur *graphic designer* & *photographer* who believes *vision* is the gateway to *mission*",
-        "more": "Yet, I'm *more* than those labels suggest, ever *curious* and ever *evolving*"
+        "designer": "I'm also an amateur *graphic designer* & *photographer* who believes *vision* is the stepstone to *mission*",
+        "more": "Yet, I'm *not* defined by those labels, ever *curious* and ever *evolving*"
+    },
+    "link": {
+        "lang": "Switch language",
+        "ins": "Instagram",
+        "git": "GitHub",
+        "wechat": "WeChat public account",
+        "linkedin": "LinkedIn",
+        "gallery": "Gallery"
     },
     "header": {
         "cv": "CV",
-        "projects": "Projects"
+        "projects": "Projects",
+        "skillset": "Skill Set",
+        "wechat":"WeChat Public Account",
+        "gallery": "Gallery",
+        "ins": "Instagram",
+        "email": "Email",
+        "git": "GitHub"
     },
     "footer": {
         "shoutout": "Shout out to Montenegro for the TLD."
     },
     "cv": {
-        "education": "Education",
-        "workExperience": "Work Experience",
-        "hkust": "Hong Kong University of Science and Technology",
-        "sysu": "Sun Yat-sen University",
-        "sensetime": "Sensetime Group Limited"
+        "name": "Neil \"Bogo\" Sun 孙展博",
+        "base": "Hong Kong, China",
+        "edu": "Education",
+        "eduExp": {
+            "hkust": {
+                "name": "Hong Kong University of Science and Technology",
+                "degree": "Master of Science in Information Technology",
+                "period": "2018 ~ 2019",
+                "detail": "CPA 4.12, straight As"
+            },
+            "sysu": {
+                "name": "Sun Yat-sen University",
+                "degree": "Bachelor of Engineering in Software Engineering (Digital Media)",
+                "period": "2014 ~ 2018",
+                "detail": "GPA 3.7, top 10% of the major"
+            }
+        },
+        "work": "Work Experience",
+        "workExp": {
+            "tcl": {
+                "name": "TCL Corporate Research",
+                "period": "2023 ~ now",
+                "pos1": {
+                    "title": "Senior AI Engineer",
+                    "period": "2023 ~ now",
+                    "detail": "Design, development, and delivery of industrial AI platforms; design and development of Large Language Model bases applications"
+                }
+            },
+            "sensetime": {
+                "name": "SenseTime Group Ltd.",
+                "period": "2019 ~ 2023",
+                "pos1": {
+                    "title": "Algorithm Engineer",
+                    "period": "2020 ~ 2023",
+                    "detail": "Design, development, and delivery of industrial, as well as for general purpose, AI data management and model production platforms from scratch"
+                },
+                "pos2": {
+                    "title": "AI Researcher",
+                    "period": "2019 ~ 2020",
+                    "detail": "Research on large-scale image classification, object detection, and other deep learning algorithms"
+                }
+            },
+            "cvte": {
+                "name": "CVTE (Guangzhou Shiyuan Electronics)",
+                "period": "2017",
+                "pos1": {
+                    "title": "Front-end Development Intern",
+                    "period": "2017",
+                    "detail": "Front-end web development for intelligent education software"
+                }
+            }
+        }
     }
 }
   

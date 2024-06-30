@@ -5,23 +5,84 @@
     "subtitle": {
         "engineer": "我是一名拥有扎实*全栈开发*背景的*AI工程师*",
         "programmer": "我是一名热衷于*学习*、*实践*与*创造*的*开发者*",
-        "blogger": "我时常更新*博客*，内容主要涉猎*人工智能*、*读书*与*电影*",
-        "designer": "我还是一名业余*平面设计师*、*摄影师*，我相信*vision*是通往*mission*的大门",
-        "more": "然而，我*不仅*是这些标签，*永远好奇*、*不断进化*"
+        "blogger": "我时常更新*博客*，内容包括*人工智能*、*读书*与*电影*",
+        "designer": "我还是一名业余*平面设计师*、*摄影师*，我相信*Vision*是*Mission*的基石",
+        "more": "然而，我*不仅*是这些标签，*苟日新*、*日日新*、*又日新*"
+    },
+    "link": {
+        "lang": "切换语言",
+        "ins": "Instagram",
+        "git": "GitHub",
+        "wechat": "微信公众号",
+        "linkedin": "LinkedIn",
+        "gallery": "相册"
     },
     "header": {
         "cv": "简历",
-        "projects": "项目"
+        "projects": "项目",
+        "skillset": "技术栈",
+        "wechat":"微信公众号",
+        "gallery": "作品集",
+        "ins": "Instagram",
+        "email": "Email",
+        "git": "GitHub"
     },
     "footer": {
         "shoutout": "感谢黑山共和国的顶级域名"
     },
     "cv": {
-        "education": "教育背景",
-        "workExperience": "工作经历",
-        "hkust": "香港科技大学",
-        "sysu": "中山大学",
-        "sensetime": "商汤科技有限公司"
+        "name": "孙展博 Neil \"Bogo\" Sun",
+        "base": "中国香港",
+        "edu": "教育背景",
+        "eduExp": {
+            "hkust": {
+                "name": "香港科技大学",
+                "degree": "资讯科技理学硕士",
+                "period": "2018 ~ 2019",
+                "detail": "CPA 4.12，全A毕业"
+            },
+            "sysu": {
+                "name": "中山大学",
+                "degree": "软件工程（数字媒体）工学学士",
+                "period": "2014 ~ 2018",
+                "detail": "GPA 3.7，专业排名前10%"
+            }
+        },
+        "work": "工作经历",
+        "workExp": {
+            "tcl": {
+                "name": "TCL工业研究院",
+                "period": "2023至今",
+                "pos1": {
+                    "title": "高级AI工程师",
+                    "period": "2023至今",
+                    "detail": "工业AI平台的设计、开发与交付；大模型应用设计与开发"
+                }
+            },
+            "sensetime": {
+                "name": "商汤科技",
+                "period": "2019 ~ 2023",
+                "pos1": {
+                    "title": "算法工程师",
+                    "period": "2020 ~ 2023",
+                    "detail": "从零到一，工业定制及通用AI数据管理与模型生产平台的设计、开发与交付"
+                },
+                "pos2": {
+                    "title": "算法研究员",
+                    "period": "2019 ~ 2020",
+                    "detail": "大规模图像分类、目标检测等深度学习算法研究"
+                }
+            },
+            "cvte": {
+                "name": "广州视源股份",
+                "period": "2017",
+                "pos1": {
+                    "title": "前端开发实习生",
+                    "period": "2017",
+                    "detail": "智能教育软件前端网页开发"
+                }
+            }
+        }
     }
 }
   

@@ -36,7 +36,7 @@ const App: React.FC = () => {
 
   return (
     <div className="App">
-      <Header setCurrentPage={setCurrentPage} />
+      <Header />
       <div className="main-content">{renderPage()}</div>
       <Footer />
     </div>

@@ -1,0 +1,17 @@
+{
+    "eduExp": ["hkust", "sysu"],
+    "workExp": [
+        {
+            "company": "tcl",
+            "posNum": 1
+        },
+        {
+            "company": "sensetime",
+            "posNum": 2
+        },
+        {
+            "company": "cvte",
+            "posNum": 1
+        }
+    ]
+}

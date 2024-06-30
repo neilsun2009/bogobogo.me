@@ -9,6 +9,7 @@ const Footer: React.FC = () => {
   return (
     <footer className="Footer">
       <p>© Copyright Bogo 2016~{currentYear}. All rights reserved.</p>
+      <p><a href="mailto:neilsun2009@163.com">neilsun2009@163.com</a></p>
       <p>
         <img
           src="https://flagcdn.com/16x12/me.png"

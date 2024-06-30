@@ -1,17 +1,17 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import './CV.less';
+import './Skillset.less';
 import { motion } from 'framer-motion';
 import SubpageProps from '../utils/SubpageProps';
 import cvConfig from '../configs/cv.json';
 import { EnvironmentOutlined } from '@ant-design/icons';
 
-const CV: React.FC<SubpageProps> = ({ color }) => {
+const Skillset: React.FC<SubpageProps> = ({ color }) => {
   const { t, i18n } = useTranslation();
   const lang = i18n.language;
 
   return (
-    <div className="CV">
+    <div className="skillset">
       <motion.h1
         className='subpageH1'
         initial={{ opacity: 0, y: -50 }}
@@ -28,7 +28,7 @@ const CV: React.FC<SubpageProps> = ({ color }) => {
           animate={{ opacity: 1 }}
           transition={{ delay: 0, duration: 0.5 }}
         > */}
-          {t('header.cv')}
+          {t('header.skillset')}
           <motion.div
             className="bar"
             style={{ 
@@ -125,4 +125,4 @@ const CV: React.FC<SubpageProps> = ({ color }) => {
   );
 }
 
-export default CV;
+export default Skillset;

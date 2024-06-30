@@ -1,3 +1,5 @@
+@import "../global.less";
+
 .HomePage {
   display: flex;
   flex-direction: row;
@@ -8,18 +10,73 @@
   width: 100%;
   color: #333;
   font-family: var(--primary-font);
-  
+
+  .linkBtn {
+    display: inline-block;
+    font-family: var(--primary-font);
+    margin: 0 20px 10px 0;
+    padding: 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+    color: #666;
+    opacity: 0.75;
+    transition: all 0.2s ease-in-out;
+    text-decoration: none;
+    text-shadow: 1px 1px 0 #fff;
+    
+    @media (max-width: 480px) {
+      font-size: 1rem;
+      line-height: 1rem;
+    }
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+
   .white {
     flex: 1;
     background: white;
+    transition: all 0.5s ease-in-out;
+    padding: 40px 40px 50px;
+
+    @media (max-width: 480px) {
+      padding: 20px 20px 50px;
+    }
+
+    &.subpage {
+      flex: 2;
+
+      @media (max-width: 480px) {
+        flex: 3;
+      }
+    }
+
+    .content {
+      box-sizing: border-box;
+      width: 100%;
+      height: calc(100% - 50px); // Subtract the total vertical padding
+      overflow-y: auto;
+
+      // @media (max-width: 480px) {
+      //   height: calc(100% - 20px);
+      // }
+    }
   }
 
   .bgWrapper {
     flex: 2;
     overflow: hidden;
+    transition: width 0.5s ease-in-out;
 
     @media (max-width: 480px) {
       flex: 3;
+    }
+
+    &.subpage {
+      flex: 1;
     }
   }
   
@@ -71,7 +128,7 @@
           bottom: 0;
           left: 0;
           width: 100%;
-          height: 50%;
+          height: 60%;
           z-index: -1;
           -webkit-box-decoration-break: clone;
           box-decoration-break: clone;
@@ -131,7 +188,7 @@
 
         .bar {
           position: absolute;
-          bottom: -2px;
+          bottom: 0;
           left: 2px;
           width: 100%;
           height: 50%;
@@ -178,25 +235,23 @@
         height: 30px;
       }
 
-      button {
-        font-family: var(--primary-font);
-        margin: 0 20px 0 0;
-        padding: 0;
-        background: none;
-        border: none;
-        cursor: pointer;
-        font-size: 1.2rem;
-        color: #666;
-        opacity: 0.75;
-        transition: all 0.2s ease-in-out;
-        
-        @media (max-width: 480px) {
-          font-size: 1rem;
-          line-height: 1rem;
-        }
+      .wechatQrCtn {
+        position: relative;
+        display: inline-block;
 
-        &:hover {
-          opacity: 1;
+        .qrcode {
+          top: -10px;
+          left: 100%;
+          &.hide {
+            width: 0;
+            opacity: 0;
+          }
+          &:before {
+            display: none;
+          }
+          img {
+            border: 1px solid #ddd;
+          }
         }
       }
     }
