@@ -1,16 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import './Projects.less';
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import SubpageProps from '../utils/SubpageProps';
 import projectsConfig from '../configs/projects.json';
-import { ExportOutlined, PlusCircleOutlined } from '@ant-design/icons';
+import { CloseCircleFilled, ExportOutlined, ZoomInOutlined } from '@ant-design/icons';
 import { Carousel } from 'react-responsive-carousel';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 const Projects: React.FC<SubpageProps> = ({ color }) => {
   const { t, i18n } = useTranslation();
   const lang = i18n.language;
+
+  const [showZoomedCarousel, setShowZoomedCarousel] = useState(false);
+  const [currentImageList, setCurrentImageList] = useState<string[]>([]);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  const handleClickImage = (imageList: string[], index: number) => {
+    setCurrentImageList(imageList);
+    setCurrentImageIndex(index);
+    setShowZoomedCarousel(true);
+  };
 
   const renderProjectsSection = (
         name: string, 
@@ -41,13 +51,16 @@ const Projects: React.FC<SubpageProps> = ({ color }) => {
                     interval={5000 + 100 * itemIdx}
                     swipeable={true}
                   >
-                    {item.images.map((image, imageIdx) => (
-                      <div key={imageIdx} className="imageCtn">
+                    {item.images.map((image, imageIdx, imageList) => (
+                      <div key={imageIdx} className="imageCtn"
+                        onClick={() => handleClickImage(imageList, imageIdx)}
+                      >
                         <div className="itemBg"
                           style={{
                             backgroundImage: `url(${image})`,
                           }}
                         ></div>
+                        <div className='zoom'><ZoomInOutlined /></div>
                       </div>
                     ))}
                   </Carousel>
@@ -109,6 +122,33 @@ const Projects: React.FC<SubpageProps> = ({ color }) => {
       </motion.h1>
       {renderProjectsSection('current', 0, projectsConfig.current)}
       {renderProjectsSection('past', 0, projectsConfig.past)}
+      <AnimatePresence>
+        {showZoomedCarousel && (
+          <motion.div className="zoomedCarouselBackdrop"
+            initial={{ opacity: 0, scale: 0.5}}
+            animate={{ opacity: 1, scale: 1}}
+            exit={{ opacity: 0, scale: 0.5}}
+            transition={{ duration: 0.3}}
+          >
+            <button className="closeButton" onClick={() => setShowZoomedCarousel(false)}><CloseCircleFilled /></button>
+            <div className='slideCtn'>
+              <Carousel 
+                showThumbs={true} 
+                showStatus={false}
+                infiniteLoop={true}
+                selectedItem={currentImageIndex}
+                swipeable={true}
+              >
+                {currentImageList.map((image, imageIdx) => (
+                  <div key={imageIdx} className="imageCtn">
+                    <img src={image} alt="" />
+                  </div>
+                ))}
+              </Carousel>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

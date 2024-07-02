@@ -4,7 +4,7 @@ import './Gallery.less';
 import { motion } from 'framer-motion';
 import SubpageProps from '../utils/SubpageProps';
 import galleryConfig from '../configs/gallery.json';
-import { PlusCircleOutlined } from '@ant-design/icons';
+import { CopyOutlined, PlusCircleOutlined } from '@ant-design/icons';
 
 const Gallery: React.FC<SubpageProps> = ({ color }) => {
   const { t, i18n } = useTranslation();
@@ -39,7 +39,7 @@ const Gallery: React.FC<SubpageProps> = ({ color }) => {
                   }}
                 >
                 </div>
-                <div className='count'>x {item.count}</div>
+                <div className='count'><CopyOutlined /> {item.count}</div>
                 <div className='title'>
                   {t(`gallery.${name}List.${item.title}`)}
                 </div>
