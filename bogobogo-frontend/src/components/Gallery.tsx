@@ -33,11 +33,13 @@ const Gallery: React.FC<SubpageProps> = ({ color }) => {
                 rel="noreferrer"
                 key={itemIdx} 
               >
-                <div className="bg"
+                <div className="itemBg"
                   style={{
                     backgroundImage: `url(${item.cover})`,
                   }}
-                ></div>
+                >
+                </div>
+                <div className='count'>x {item.count}</div>
                 <div className='title'>
                   {t(`gallery.${name}List.${item.title}`)}
                 </div>
@@ -45,11 +47,11 @@ const Gallery: React.FC<SubpageProps> = ({ color }) => {
             ))}
             <a 
               className='item' 
-              href='https://imgur.com/user/neilsun2009/posts'
+              href='https://www.flickr.com/photos/200975799@N04/albums'
               target="_blank" 
               rel="noreferrer"
             >
-              <div className="bg"><PlusCircleOutlined /></div>
+              <div className="itemBg"><PlusCircleOutlined /></div>
               <div className='title'>
                 {t('gallery.more')}
               </div>

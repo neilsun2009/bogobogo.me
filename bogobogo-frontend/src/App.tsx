@@ -21,6 +21,24 @@ const App: React.FC = () => {
     }
   }, [i18n.language]);
 
+  // set eal window.innerHeight
+  useEffect(() => {
+    const setAppHeight = () => {
+      const app = document.querySelector('.App') as HTMLElement;
+      if (app) {
+        app.style.height = `${window.innerHeight}px`;
+      }
+    };
+
+    window.addEventListener('resize', setAppHeight);
+    setAppHeight(); // Set the height at the first render
+
+    // Clean up the event listener when the component is unmounted
+    return () => {
+      window.removeEventListener('resize', setAppHeight);
+    };
+  }, []);
+
   const renderPage = () => {
     switch (currentPage) {
       case 'home':

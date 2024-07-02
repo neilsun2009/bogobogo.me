@@ -5,7 +5,7 @@
     "subtitle": {
         "engineer": "I'm an *AI engineer* with a strong *full-stack development* background",
         "programmer": "I'm a *passionate programmer* who programs to *learn*, *practice* and *create*",
-        "blogger": "I'm a *blogger* who writes about *AI*, *books*, and *films*",
+        "blogger": "I'm a *blogger* who mainly writes about *AI*, *books*, and *films*",
         "designer": "I'm also an amateur *graphic designer* & *photographer* who believes *vision* is the stepstone to *mission*",
         "more": "Yet, I'm *not* defined by those labels, ever *curious* and ever *evolving*"
     },
@@ -13,7 +13,7 @@
         "lang": "Switch language",
         "ins": "Instagram",
         "git": "GitHub",
-        "wechat": "WeChat public account",
+        "wechat": "WeChat articles",
         "linkedin": "LinkedIn",
         "gallery": "Gallery"
     },
@@ -21,7 +21,7 @@
         "cv": "CV",
         "projects": "Projects",
         "skillset": "Skill Set",
-        "wechat":"WeChat Public Account",
+        "wechat":"WeChat Articles",
         "gallery": "Gallery",
         "ins": "Instagram",
         "email": "Email",
@@ -56,7 +56,7 @@
                 "pos1": {
                     "title": "Senior AI Engineer",
                     "period": "2023 ~ now",
-                    "detail": "Design, development, and delivery of industrial AI platforms; design and development of Large Language Model bases applications"
+                    "detail": "Design, development, and delivery of industrial AI platforms; design and development of Large Language Model based applications"
                 }
             },
             "sensetime": {
@@ -128,7 +128,30 @@
             "dragonBoatFestival": "Dragon boat race",
             "shingMunRiver": "Strolling along Shing Mun River",
             "nathanRoad": "Nathan Road",
-            "flyAway": "Fly away"
+            "minibus": "Minibus"
+        }
+    },
+    "projects": {
+        "current": "Current Projects",
+        "past": "Past Projects",
+        "link": "Check it out!",
+        "projectDetails": {
+            "bots": {
+                "title": "BogoBots",
+                "desc": "A collection of AI bots for various ideas and tasks, developed using LangChain, Streamlit & major LLM APIs."
+            },
+            "insight": {
+                "title": "BogoInsight",
+                "desc": "A data analysis & visualization platform with Streamlit & Plotly. Topics include AI, finance and more."
+            },
+            "footprint": {
+                "title": "Footprint",
+                "desc": "A website for football fans to record and share their football journey, with a unique UI."
+            },
+            "personalWebsite": {
+                "title": "Past versions of BogoBogo",
+                "desc": "This website has gone through several iterations. Each version has its own unique design ideas."
+            }
         }
     }
 }

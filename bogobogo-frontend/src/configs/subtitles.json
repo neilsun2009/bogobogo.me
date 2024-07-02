@@ -2,36 +2,36 @@
     {
         "index": 0,
         "subtitleKey": "subtitle.engineer",
-        "bg": "https://static.bogobogo.cn/bogobogo.me/covers/bg-1.jpg",
-        "bgVertical": "https://static.bogobogo.cn/bogobogo.me/covers/bg-1-v.jpg",
+        "bg": "https://i.imgur.com/cVUiAe1.jpeg",
+        "bgVertical": "https://i.imgur.com/E1wayuC.jpeg",
         "color": "#99e6ff"
     },
     {
         "index": 1,
         "subtitleKey": "subtitle.programmer",
-        "bg": "https://static.bogobogo.cn/bogobogo.me/covers/bg-2.jpg",
-        "bgVertical": "https://static.bogobogo.cn/bogobogo.me/covers/bg-2-v.jpg",
+        "bg": "https://i.imgur.com/dbU7qA3.jpeg",
+        "bgVertical": "https://i.imgur.com/MbhKuIn.jpeg",
         "color": "#FFE31C"
     },
     {
         "index": 2,
         "subtitleKey": "subtitle.blogger",
-        "bg": "https://static.bogobogo.cn/bogobogo.me/covers/bg-3.jpg",
-        "bgVertical": "https://static.bogobogo.cn/bogobogo.me/covers/bg-3-v.jpg",
+        "bg": "https://i.imgur.com/aoWzQtg.jpeg",
+        "bgVertical": "https://i.imgur.com/kwxxE91.jpeg",
         "color": "#ff1a8c"
     },
     {
         "index": 3,
         "subtitleKey": "subtitle.designer",
-        "bg": "https://static.bogobogo.cn/bogobogo.me/covers/bg-4.jpg",
-        "bgVertical": "https://static.bogobogo.cn/bogobogo.me/covers/bg-4-v2.jpg",
+        "bg": "https://i.imgur.com/X4dYIvC.jpeg",
+        "bgVertical": "https://i.imgur.com/5kUuKqm.jpeg",
         "color": "#ff531a"
     },
     {
         "index": 4,
         "subtitleKey": "subtitle.more",
-        "bg": "https://static.bogobogo.cn/bogobogo.me/covers/bg-5.jpg",
-        "bgVertical": "https://static.bogobogo.cn/bogobogo.me/covers/bg-5-v.jpg",
+        "bg": "https://i.imgur.com/IoR3OCK.jpeg",
+        "bgVertical": "https://i.imgur.com/X04QRqg.jpeg",
         "color": "#b366ff"
     }
 ]

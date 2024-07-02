@@ -5,9 +5,9 @@
     "subtitle": {
         "engineer": "我是一名拥有扎实*全栈开发*背景的*AI工程师*",
         "programmer": "我是一名热衷于*学习*、*实践*与*创造*的*开发者*",
-        "blogger": "我时常更新*博客*，内容包括*人工智能*、*读书*与*电影*",
-        "designer": "我还是一名业余*平面设计师*、*摄影师*，我相信*Vision*是*Mission*的基石",
-        "more": "然而，我*不仅*是这些标签，*苟日新*、*日日新*、*又日新*"
+        "blogger": "我时常更新*博客*，内容主要包括*人工智能*、*图书*与*电影*",
+        "designer": "我还是一名业余*平面设计师*、*摄影师*，我相信*vision*是*mission*的基石",
+        "more": "然而，我*不仅*被这些标签定义，*充满好奇*、*不断进化*"
     },
     "link": {
         "lang": "切换语言",
@@ -28,7 +28,6 @@
         "git": "GitHub"
     },
     "footer": {
-        "shoutout": "感谢黑山共和国的顶级域名"
     },
     "cv": {
         "name": "孙展博 Neil \"Bogo\" Sun",
@@ -128,7 +127,30 @@
             "dragonBoatFestival": "端午龙舟赛",
             "shingMunRiver": "漫步城门河",
             "nathanRoad": "弥敦道",
-            "flyAway": "Fly away"
+            "minibus": "小巴"
+        }
+    },
+    "projects": {
+        "current": "维护中的项目",
+        "past": "历史项目",
+        "link": "点此访问",
+        "projectDetails": {
+            "bots": {
+                "title": "BogoBots",
+                "desc": "一系列针对不同场景与任务的AI bots，基于LangChain、Streamlit，以及各大LLM的API搭建开发。"
+            },
+            "insight": {
+                "title": "BogoInsight",
+                "desc": "一个数据分析和可视化平台，使用Streamlit和Plotly搭建，主题包括AI、金融等。"
+            },
+            "footprint": {
+                "title": "Footprint",
+                "desc": "一个供足球迷记录和分享他们的足球之旅的网站，UI界面独具一格。"
+            },
+            "personalWebsite": {
+                "title": "BogoBogo的历史版本",
+                "desc": "此网站经历了多次迭代，每个版本都有自己独特的设计理念。"
+            }
         }
     }
 }

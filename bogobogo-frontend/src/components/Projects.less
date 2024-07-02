@@ -1,22 +1,153 @@
-.Projects {
-    padding: 20px;
-    overflow-y: auto;
-    height: 100vh;
-  
+@import "../global.less";
+
+.projects {
+    color: #333;
+    margin-right: 5px;
+
     h2 {
-      margin-top: 0;
+        font-size: 2.5rem;
+        line-height: 3.5rem;
+        margin: 20px 0 10px;
+
+        @media (max-width: 768px) {
+            font-size: 2rem;
+            line-height: 3rem;
+        }
+        
+          @media (max-width: 480px) {
+            font-size: 1.5rem;
+            line-height: 2.5rem;
+        }
     }
+
+    .sectionCtn {
+        display: flex;
+        flex-wrap: wrap;
+
+        .item {
+            width: 100%;
+            box-sizing: border-box;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: row;
+            align-items: stretch;
+            margin-bottom: 10px;
+
+            @media (max-width: 768px) {
+                width: 100%;
+                margin-bottom: 20px;
+                flex-direction: column;
+                align-items: start;
+            }
+
+            &:hover {
+              .itemBg {
+                transform: scale(1.1);
+                opacity: 0.8;
+              }
+            }
+
+            .sliderCtn {
+              width: 50%;
+              @media (max-width: 768px) {
+                width: 100%;
+              }
+            }
+
+            .imageCtn {
+              width: 100%;
+              height: 100%;
+              position: relative;
+              overflow: hidden;
+              padding-bottom: 66.67%;
+
+              @media (max-width: 768px) {
+                width: 100%;
+                padding-bottom: 66.67%;
+              }
+
+              .itemBg {
+                  position: absolute;
+                  top: 0;
+                  left: 0;
+                  width: 100%;
+                  height: 100%;
+                  background-color: #eee;
+                  background-size: cover;
+                  background-position: center;
+                  background-repeat: no-repeat;
+                  transition: all 0.3s;
   
-    .project {
-      margin-bottom: 20px;
+              }
+            }
+
+            .detail {
+              width: 50%;
+              height: 100%;
+              padding: 0 10px;
+              position: relative;
+
+              @media (max-width: 768px) {
+                width: 100%;
+                padding: 5px 0 10px;
+              }
+
+              .title {
+                width: 100%;
+                max-width: 100%;
+                color: #333;
+                box-sizing: border-box;
+                // text-overflow: ellipsis;
+                // overflow: hidden;
+                // white-space: nowrap;
+                font-size: 1.5rem;
+                line-height: 2rem;
+                font-weight: 600;
+                border-bottom: 1px solid #ddd;
+                padding-bottom: 5px;
+
+                @media (max-width: 768px) {
+                    font-size: 1.2rem;
+                    line-height: 1.5rem;
+                }
+              }
+
+              .desc {
+                color: #666;
+                font-size: 1.2rem;
+                margin-top: 10px;
+                @media (max-width: 768px) {
+                    font-size: 1rem;
+                }
+              }
+
+              .link {
+                display: block;
+                text-decoration: none;
+                position: absolute;
+                bottom: 0;
+                right: 0;
+                font-family: var(--secondary-font);
+                font-size: 1rem;
+                color: #666;
+                opacity: 0.75;
+                transition: all 0.3s;
+
+                &:hover {
+                  opacity: 1;
+                }
+
+                @media (max-width: 768px) {
+                  margin-top: 10px;
+                  position: relative;
+                  font-size: 0.8rem;
+                }
+              }
+            }
+
+        
+        }
     }
-  
-    h3 {
-      margin-bottom: 5px;
-    }
-  
-    p {
-      margin: 2px 0;
-    }
-  }
-  
+
+}

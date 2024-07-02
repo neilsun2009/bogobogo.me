@@ -1,0 +1,46 @@
+{
+    "current": [
+        {
+            "name": "bots",
+            "link": "https://bots.bogobogo.me/",
+            "images": [
+                "https://i.imgur.com/apXgbvs.png",
+                "https://i.imgur.com/uaagUK8.png",
+                "https://i.imgur.com/VXJt56h.png"
+            ]
+        },
+        {
+            "name": "insight",
+            "link": "https://insight.bogobogo.me/",
+            "images": [
+                "https://i.imgur.com/CvZCejn.png",
+                "https://i.imgur.com/FirybdT.png",
+                "https://i.imgur.com/tzPpE9s.png"
+            ]
+        }
+    ],
+    "past": [
+        {
+            "name": "footprint",
+            "images": [
+                "https://i.imgur.com/ielo3aK.png",
+                "https://i.imgur.com/n5MULyf.png",
+                "https://i.imgur.com/V9IdHYk.png",
+                "https://i.imgur.com/NZI0XH1.png",
+                "https://i.imgur.com/c47Bc6U.png"
+            ]
+        },
+        {
+            "name": "personalWebsite",
+            "images": [
+                "https://i.imgur.com/ZS8OPsW.png",
+                "https://i.imgur.com/bQoK2fE.png",
+                "https://i.imgur.com/POMHPu3.png",
+                "https://i.imgur.com/yvwxya0.png",
+                "https://i.imgur.com/PlloYNm.png",
+                "https://i.imgur.com/hvXwD78.png",
+                "https://i.imgur.com/Jh45xzZ.png"
+            ]
+        }
+    ]
+}

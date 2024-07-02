@@ -11,6 +11,9 @@ import wechatQrcode from '../assets/wechat-qrcode.bmp';
 import Skillset from './Skillset';
 import Gallery from './Gallery';
 
+// Create a cache object outside of your component
+const imageCache: { [key: string]: string } = {};
+
 const HomePage: React.FC = () => {
   const { t, i18n } = useTranslation();
   const [currentPage, setCurrentPage] = useState('home');
@@ -54,7 +57,7 @@ const HomePage: React.FC = () => {
     cv: <CV color={curSubtitle.color}/>,
     skillset: <Skillset color={curSubtitle.color}/>,
     gallery: <Gallery color={curSubtitle.color}/>,
-    projects: <Projects />,
+    projects: <Projects color={curSubtitle.color}/>,
   }
 
   const handleLinkClick = (page: string) => {
@@ -118,11 +121,7 @@ const HomePage: React.FC = () => {
     exit: { opacity: 0, y: 100, transition: { duration: 0.3 } }
   };
 
-  // background tracking
-  const [loadedBg, setLoadedBg] = useState('');
-  const mouseRef = React.useRef(null);
-  const { docX, docY } = useMouse(mouseRef);
-  const [orientation, setOrientation] = useState({ alpha: 0, beta: 0 });
+  // background image loading
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   useEffect(() => {
@@ -137,47 +136,104 @@ const HomePage: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    const img = new Image();
-    img.src = windowWidth <= 480 ? curSubtitle.bgVertical : curSubtitle.bg;
-    img.onload = () => {
-      setLoadedBg(img.src);
-    };
+    const imgSrc = windowWidth <= 480 ? curSubtitle.bgVertical : curSubtitle.bg;
+    // If the image is already in the cache, use it
+    if (imageCache[imgSrc]) {
+      setLoadedBg(imageCache[imgSrc]);
+    } else {
+      // Otherwise, load the image and add it to the cache
+      const img = new Image();
+      img.src = imgSrc;
+      img.onload = () => {
+        imageCache[imgSrc] = img.src;
+        setLoadedBg(img.src);
+      };
+      // Otherwise, fetch the image, convert it to base64, and add it to the cache
+      // fetch(imgSrc)
+      //   .then(response => response.blob())
+      //   .then(blob => {
+      //     const reader = new FileReader();
+      //     reader.onloadend = () => {
+      //       const base64data = reader.result;
+      //       imageCache[imgSrc] = base64data as string;
+      //       setLoadedBg(base64data as string);
+      //     };
+      //     reader.readAsDataURL(blob);
+      //   });
+    }
   }, [curSubtitle.bg, windowWidth]);
-  
-  useEffect(() => {
-    const handleOrientation = (event: DeviceOrientationEvent) => {
-      setOrientation({ alpha: event.alpha || 0, beta: event.beta || 0 });
-    };
 
-    window.addEventListener('deviceorientation', handleOrientation);
+  // background tracking
+  const [loadedBg, setLoadedBg] = useState('');
+  const mouseRef = React.useRef(null);
+  const { docX, docY } = useMouse(mouseRef);
+  // const [orientation, setOrientation] = useState({ alpha: 0, beta: 0 });
 
-    return () => {
-      window.removeEventListener('deviceorientation', handleOrientation);
-    };
-  }, []);
-
+  // for mouse
   const motionDocX = useMotionValue(docX);
   const motionDocY = useMotionValue(docY);
-
-  const x = useTransform(motionDocX, [0, window.innerWidth], ['2.5%', '-2.5%']);
-  const y = useTransform(motionDocY, [0, window.innerHeight], ['2.5%', '-2.5%']);
-
-  const normalize = (value: number, min: number, max: number, newMin: number, newMax: number) => {
-    return ((value - min) / (max - min)) * (newMax - newMin) + newMin;
-  };
 
   useEffect(() => {
     motionDocX.set(docX);
     motionDocY.set(docY);
+  }, [docX, docY]);
+  
+  const x = useTransform(motionDocX, [0, window.innerWidth], ['2.5%', '-2.5%']);
+  const y = useTransform(motionDocY, [0, window.innerHeight], ['2.5%', '-2.5%']);
+  
+  const normalize = (value: number, min: number, max: number, newMin: number, newMax: number) => {
+    const newValue = Math.min(Math.max(value, min), max);
+    return ((newValue - min) / (max - min)) * (newMax - newMin) + newMin;
+  };
 
-    // Check if it's a mobile device
-    if ('ontouchstart' in window) {
-      const normalizedAlpha = normalize(orientation.alpha || 0, 0, 360, -2.5, 2.5);
-      const normalizedBeta = normalize(orientation.beta || 0, -180, 180, -2.5, 2.5);
-      x.set(`${normalizedAlpha}%`);
-      y.set(`${normalizedBeta}%`);
+  // for mobile
+  const isMobileDevice = () => {
+    return 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+  };
+
+  const handleOrientation = (event: DeviceOrientationEvent) => {
+    const gamma = event.gamma || 0;
+    const beta = event.beta || 0;
+    const normalizedGamma = normalize(gamma, -90, 90, 2.5, -2.5);
+    const normalizedBeta = normalize(beta, -180, 180, -2.5, 2.5);
+    x.set(`${normalizedGamma}%`);
+    y.set(`${normalizedBeta}%`);
+  };
+
+  const [isOrientationEventBound, setIsOrientationEventBound] = useState(false);
+
+  const requestOrientationPermission = () => {
+    if (!isOrientationEventBound && typeof DeviceOrientationEvent !== 'undefined' && typeof (DeviceOrientationEvent as any).requestPermission === 'function') {
+      (DeviceOrientationEvent as any).requestPermission()
+        .then((response: PermissionState) => {
+          if (response === 'granted') {
+            window.addEventListener('deviceorientation', handleOrientation);
+            setIsOrientationEventBound(true);
+          }
+        })
+        .catch(console.error);
+    } else if (!isOrientationEventBound) {
+      // non iOS 13+
+      window.addEventListener('deviceorientation', handleOrientation);
+      setIsOrientationEventBound(true);
     }
-  }, [docX, docY, orientation.alpha, orientation.beta]);
+  };
+
+  useEffect(() => {
+    // Check if permission is required
+    if (!isOrientationEventBound && typeof DeviceOrientationEvent !== 'undefined' && typeof (DeviceOrientationEvent as any).requestPermission === 'function') {
+      navigator.permissions.query({ name: 'deviceorientation' as PermissionName }).then((result) => {
+        if (result.state === 'granted') {
+          window.addEventListener('deviceorientation', handleOrientation);
+          setIsOrientationEventBound(true);
+        }
+      });
+    } else if (!isOrientationEventBound) {
+      // non iOS 13+
+      window.addEventListener('deviceorientation', handleOrientation);
+      setIsOrientationEventBound(true);
+    }
+  }, [isOrientationEventBound]);
 
   return (<>{pageVisible && (
     <div className="HomePage">
@@ -197,6 +253,7 @@ const HomePage: React.FC = () => {
           animate="in"
           exit="out"
           variants={bgVariants}
+          onClick={requestOrientationPermission}
           // transition={bgTransition}
         >
           <motion.div 
