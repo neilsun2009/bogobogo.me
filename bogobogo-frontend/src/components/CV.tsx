@@ -6,6 +6,8 @@ import SubpageProps from '../utils/SubpageProps';
 import cvConfig from '../configs/cv.json';
 import { EnvironmentOutlined } from '@ant-design/icons';
 
+type LogoKey = 'hkust' | 'sysu' | 'tcl' | 'sensetime' | 'cvte';
+
 const CV: React.FC<SubpageProps> = ({ color }) => {
   const { t, i18n } = useTranslation();
   const lang = i18n.language;
@@ -69,17 +71,20 @@ const CV: React.FC<SubpageProps> = ({ color }) => {
           transition={{ delay: 1 + 0.2 * index, duration: 0.5 }}
         >
           <div className='periodCtn'>
-            <h3>{t(`cv.eduExp.${edu}.name`)}</h3>
-            <p className='big'>{t(`cv.eduExp.${edu}.period`)}</p>
+            <h3>
+              <img className='logo' src={edu.logo} alt={t(`cv.eduExp.${edu.school}.name`)}></img>
+              {t(`cv.eduExp.${edu.school}.name`)}
+            </h3>
+            <p className='big'>{t(`cv.eduExp.${edu.school}.period`)}</p>
           </div>
-          <p>{t(`cv.eduExp.${edu}.degree`)}</p>
+          <p>{t(`cv.eduExp.${edu.school}.degree`)}</p>
           <p 
             className='detail' 
             style={{
               fontSize: lang === 'zh' ? '1em' : '1.2em',
             }}
           >
-            {t(`cv.eduExp.${edu}.detail`)}
+            {t(`cv.eduExp.${edu.school}.detail`)}
           </p>
         </motion.div>
       ))}
@@ -101,7 +106,10 @@ const CV: React.FC<SubpageProps> = ({ color }) => {
           transition={{ delay: 1 + 0.2 * cvConfig.eduExp.length + 0.2 + 0.2 * index, duration: 0.5 }}
         >
           <div className='periodCtn'>
-            <h3>{t(`cv.workExp.${work.company}.name`)}</h3>
+            <h3>
+              <img className='logo' src={work.logo} alt={t(`cv.workExp.${work.company}.name`)}></img>
+              {t(`cv.workExp.${work.company}.name`)}
+            </h3>
             <p className='big'>{t(`cv.workExp.${work.company}.period`)}</p>
           </div>
           {Array.from({ length: work.posNum }, (_, posIndex) => (<div key={posIndex}>
@@ -111,7 +119,7 @@ const CV: React.FC<SubpageProps> = ({ color }) => {
               
             </div>
             <p 
-              className='detail' 
+              className={`detail ${posIndex < work.posNum - 1 ? 'middle' : ''}`} 
               style={{
                 fontSize: lang === 'zh' ? '1em' : '1.2em',
               }}

@@ -1,16 +1,28 @@
 {
-    "eduExp": ["hkust", "sysu"],
+    "eduExp": [
+        { 
+            "school": "hkust",
+            "logo": "https://upload.wikimedia.org/wikipedia/en/thumb/c/cd/UST.svg/255px-UST.svg.png"
+        },
+        { 
+            "school": "sysu",
+            "logo": "https://i.imgur.com/dBG27PM.png"
+        }
+    ],
     "workExp": [
         {
             "company": "tcl",
+            "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Logo_of_the_TCL_Corporation.svg/320px-Logo_of_the_TCL_Corporation.svg.png",
             "posNum": 1
         },
         {
             "company": "sensetime",
+            "logo": "https://i.imgur.com/3QIgJP3.png",
             "posNum": 2
         },
         {
             "company": "cvte",
+            "logo": "https://i.imgur.com/yxlX6po.png",
             "posNum": 1
         }
     ]

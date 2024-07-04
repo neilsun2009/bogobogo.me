@@ -50,9 +50,25 @@
     margin: 0 0 5px;
 
     @media (max-width: 768px) {
-      font-size: 1.3rem;
-      line-height: 1.3rem;
+      font-size: 1.2rem;
+      line-height: 1.5rem;
     }
+
+    img.logo {
+      width: 2rem;
+      height: 2rem;
+      object-fit: contain;
+      display: inline-block;
+      vertical-align: bottom;
+      margin-right: 10px;
+
+      @media (max-width: 768px) {
+        width: 1.5rem;
+        height: 1.5rem;
+        margin-right: 5px;
+      }
+    }
+
   }
 
   p {
@@ -70,9 +86,17 @@
     margin: 10px 0 15px;
     color: #666;
 
+    &.middle {
+      margin-bottom: 10px;
+    }
+
     @media (max-width: 480px) {
       font-size: 1rem;
       margin: 0px 0 20px;
+
+      &.middle {
+        margin-bottom: 10px;
+      }
     }
   }
 }
