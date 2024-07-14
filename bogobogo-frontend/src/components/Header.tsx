@@ -46,9 +46,9 @@ const Header: React.FC = ({ }) => {
         <span title={t("link.gallery")}>
             <a href='https://www.flickr.com/photos/200975799@N04/albums' rel='noreferrer' target='_blank'><PictureFilled /></a>    
         </span>
-        <span title={t("link.ins")}>
+        {/* <span title={t("link.ins")}>
             <a href='https://www.instagram.com/neilsun2009/' rel='noreferrer' target='_blank'><InstagramFilled /></a>    
-        </span>
+        </span> */}
       </div>
     </header>
   );

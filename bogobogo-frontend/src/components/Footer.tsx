@@ -10,16 +10,7 @@ const Footer: React.FC = () => {
     <footer className="Footer">
       <p>© Copyright Bogo 2016~{currentYear}. All rights reserved.</p>
       <p><a href="mailto:neilsun2009@163.com">neilsun2009@163.com</a></p>
-      <p>
-        <img
-          src="https://flagcdn.com/16x12/me.png"
-          srcSet="https://flagcdn.com/32x24/me.png 2x,
-            https://flagcdn.com/48x36/me.png 3x"
-          width="16"
-          height="12"
-          alt="Montenegro"/>&nbsp;
-        {t('footer.shoutout')}
-      </p>
+      <p><a target="_blank" href="https://beian.miit.gov.cn/">粤ICP备17002636号-1</a></p>
     </footer>
   );
 }

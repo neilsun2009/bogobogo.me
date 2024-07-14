@@ -95,7 +95,7 @@ const HomePage: React.FC = () => {
       case 3: return (
         <>
           <a className='linkBtn' onClick={() => handleLinkClick('gallery')}><PictureOutlined /> {t('header.gallery')}</a>
-          <a href='https://www.instagram.com/neilsun2009/' className='linkBtn' target='_blank'><InstagramOutlined /> {t('header.ins')}</a>
+          {/* <a href='https://www.instagram.com/neilsun2009/' className='linkBtn' target='_blank'><InstagramOutlined /> {t('header.ins')}</a> */}
         </>
       );
       case 4: return (
