@@ -29,7 +29,7 @@
   "scripts": {
     "start": "craco start",
     "build": "craco build",
-    "postbuild": "cp -r build/* ../bogobogo-server/static/",
+    "postbuild": "rimraf ../bogobogo-server/static/* && cp -r build/* ../bogobogo-server/static/",
     "test": "craco test",
     "eject": "react-scripts eject"
   },
